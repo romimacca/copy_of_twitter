@@ -1,12 +1,13 @@
 <h1>Home#index</h1>
 
-<%# <%= render 'tweets/form', tweet: @tweet %> %>
-
+<% if user_signed_in? %>
+    <%= render 'tweets/form', tweet: @tweet %> 
+<% end %>
 
 <div class="row">
     <% @tweets.each do |tweet| %>
         <div class="col-12">
-            <%= image_tag (tweet.user.photo_url), class: "avatar " %>
+            <%= image_tag (tweet.user.photo_url), class: "img-thumbnail rounded-circle " %>
             <%= tweet.content %>
             <hr/>
             <%= tweet.likes.count %> like
