@@ -15,8 +15,12 @@
     <%= render "shared/navbar"%>
     <div class="row">
       <div class="container">
-        <p class="notice"><%= notice %></p>
-        <p class="alert"><%= alert %></p>
+        <% if alert || notice %>
+          <div class="alert alert-seccess mt-3" role="alert">
+            <%= notice %>
+            <%= alert %>
+          </div>
+        <%end%>
         <%= yield %>
       </div>
     </div>
