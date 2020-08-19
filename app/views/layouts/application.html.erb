@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html lang="es">
 <html>
   <head>
     <title>Twitter</title>
@@ -12,15 +12,19 @@
   </head>
 
   <body>
-    <%= render "shared/navbar"%>
+    <%= render "shared/navbar" %>
     <div class="row">
-      <div class="container">
-        <% if alert || notice %>
-          <div class="alert alert-seccess mt-3" role="alert">
+      <div class="container mt-3">
+        <% if notice %>
+          <div class="alert alert-success" role="alert">
             <%= notice %>
+          </div>
+        <% end %>
+        <% if alert %>
+          <div class="alert alert-danger" role="alert">
             <%= alert %>
           </div>
-        <%end%>
+        <% end %>
         <%= yield %>
       </div>
     </div>
