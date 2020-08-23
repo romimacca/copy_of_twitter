@@ -1,34 +1,54 @@
-<div class="col-12">
-    <%= image_tag (tweet.user.photo_url), class: "img-thumbnail rounded-circle avatar " %>
-    @<%= tweet.user.username %>
-    
+<div class="col-12 row">
     <% if tweet.is_retweet? %>
-        <%= link_to 'Retweet...', tweet.tweet_ref %>
-        <br/>
-
-        <%= image_tag (tweet.tweet_ref.user.photo_url), class: "img-thumbnail rounded-circle avatar " %>
-        @<%= tweet.tweet_ref.user.username %>
+        <div class="col-sm-12 pl-5 text-muted">
+            <i class=" fas fa-retweet"></i>
+            <%= tweet.user.username %>
+            <%= link_to 'retwitteó', tweet.tweet_ref, class: "text-reset" %>
+        </div>
     <% end %>
-    
-    
+    <div class="col-sm-1 avatar-box">
+        <% if tweet.is_retweet? %>
+            <%= image_tag (tweet.tweet_ref.user.photo_url), class: "img-thumbnail rounded-circle avatar " %>
+        <% else %>
+             <%= image_tag (tweet.user.photo_url), class: "img-thumbnail rounded-circle avatar " %>
+        <% end %>
+    </div>
 
-    <%= tweet.content %>
-        <%= link_to distance_of_time_in_words(Time.now, tweet.created_at), tweet %>
-    <%# FALTA TIEMPO %>
-    
-    <br/>
-    <%= tweet.likes.count %> 
-    <%# <%= link_to ('<i class=" '+tweet.like_icon(current_user)+'"></i>').html_safe, tweet_likes_path(tweet), method: :post %>
-    <% if tweet.is_liked?(current_user)%>
-        <%= link_to '<i class=" fas fa-heart text-danger"></i>'.html_safe, tweet_likes_path(tweet), method: :post %> 
-    <% else %>
-        <%= link_to '<i class=" far fa-heart text-secondary"></i>'.html_safe, tweet_likes_path(tweet), method: :post %> 
-    <% end%>
-    <%= tweet.count_rt%>
-    <% if tweet.count_rt > 0 %>
-        <%= link_to '<i class=" fas fa-retweet text-primary"></i>'.html_safe, tweet_retweet_path(tweet), method: :post %> 
-    <% else %>
-        <%= link_to '<i class=" fas fa-retweet text-secondary"></i>'.html_safe, tweet_retweet_path(tweet), method: :post %> 
-    <% end %>   
-    <hr/>
+    <div class="col-sm-11">
+        <% if tweet.is_retweet? %>
+            @<%= tweet.tweet_ref.user.username %>
+            <%= link_to distance_of_time_in_words(Time.now, tweet.tweet_ref.created_at), tweet.tweet_ref %>
+            <br>
+            <%= tweet.content %>
+             <br>
+            <div class="row mt-2">
+                <div class="col-sm-6">
+                    <%= link_to ('<i class="mr-2 '+tweet.tweet_ref.like_icon(current_user)+'"></i>').html_safe, tweet_likes_path(tweet.tweet_ref), method: :post %>
+                    <%= tweet.tweet_ref.likes.count%> 
+                </div>
+                <div class="col-sm-6">
+                    <%= link_to ('<i class="mr-2 fas fa-retweet '+tweet.tweet_ref.retweet_icon+'"></i>').html_safe, tweet_retweet_path(tweet.tweet_ref), method: :post %>
+                    <%= tweet.tweet_ref.count_rt%>
+                </div>
+            </div>
+        <% else %>
+            @<%= tweet.user.username %>
+            <%= link_to distance_of_time_in_words(Time.now, tweet.created_at), tweet %>
+            <br>
+            <%= tweet.content %>
+            <div class="row mt-2">
+                <div class="col-sm-6">
+                    <%= link_to ('<i class="mr-2 '+tweet.like_icon(current_user)+'"></i>').html_safe, tweet_likes_path(tweet), method: :post %>
+                    <%= tweet.likes.count%> 
+                </div>
+                <div class="col-sm-6">
+                    <%= link_to ('<i class="mr-2 fas fa-retweet '+tweet.retweet_icon+'"></i>').html_safe, tweet_retweet_path(tweet), method: :post %>
+                    <%= tweet.count_rt%>
+                </div>
+            </div>
+        
+        <% end %>
+        <br>
+    </div>
+    <hr class="col-sm-12" />
 </div>

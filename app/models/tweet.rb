@@ -5,7 +5,7 @@ class Tweet < ApplicationRecord
   has_many :likes 
   has_many :liking_users, through: :likes, source: :user
 
-  paginates_per 2
+  paginates_per 10
 
   def is_liked?(user)
     if self.liking_users.include?(user)
@@ -42,6 +42,14 @@ class Tweet < ApplicationRecord
 
   def tweet_ref
     Tweet.find(self.rt_ref)
+  end
+
+  def retweet_icon
+    if self.count_rt > 0
+      "text-primary" 
+    else
+      "text-secondary" 
+    end
   end
   
 

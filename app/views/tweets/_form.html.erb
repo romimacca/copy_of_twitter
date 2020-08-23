@@ -11,13 +11,16 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :content, "#{current_user.username} dice:" %>
-    <%= form.text_area :content, id: :tweet_content, class: "form-control" %>
+  <div class="field row">
+    <div class="col-sm-1 avatar-box text-center">
+      <%= image_tag (current_user.photo_url), class: "img-thumbnail rounded-circle avatar" %>
+    </div>
+    <div class="col-sm-11">
+      <%= form.text_area :content, id: :tweet_content, class: "form-control", placeholder: "¿Qué esta pasando?" %>
+    </div>
   </div>
 
-
   <div class="actions">
-    <%= form.submit "Twetear" %>
+    <%= form.submit "Twittear", class: "btn btn-primary rounded-pill float-right mt-2 px-4" %>
   </div>
 <% end %>
