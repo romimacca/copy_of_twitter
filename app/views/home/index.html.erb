@@ -8,6 +8,7 @@
     <% @tweets.each do |tweet| %>
         <%= render "shared/tweet_box", tweet: tweet %> 
     <% end %>
-
-    <%= paginate @tweets %>
+    <div class=" ">
+        <%= paginate @tweets %>
+    </div>
 </div>

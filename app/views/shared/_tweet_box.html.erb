@@ -12,6 +12,11 @@
         <% else %>
              <%= image_tag (tweet.user.photo_url), class: "img-thumbnail rounded-circle avatar " %>
         <% end %>
+
+        <% if user_signed_in? && current_user != tweet.user %>
+            <%= link_to (current_user.is_following?(tweet.user) ? '<i class="fas fa-users-slash"></i>' : '<i class="fas fa-user-plus"></i>').html_safe, users_follow_path(tweet.user.id), method: :post, 'title' => (current_user.is_following?(tweet.user) ? "siguiendo" : "Seguir" ) %>
+        <% end %>
+       
     </div>
 
     <div class="col-sm-11">

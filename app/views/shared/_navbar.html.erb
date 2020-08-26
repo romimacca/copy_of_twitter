@@ -1,4 +1,6 @@
 <ul class="nav flex-column">
+
+  
   <li class="nav-item">
     <%= link_to '<i class="fas fa-home fa-lg mr-2"></i>'.html_safe+' Inicio', root_path, class:"nav-link text-reset"%>
   </li>
@@ -6,10 +8,16 @@
     <li class="nav-item">
       <%= link_to '<i class="fas fa-user-circle fa-lg mr-2"></i>'.html_safe+' Mi perfil', edit_user_registration_path, class: "nav-link text-reset"%>
     </li>
+     <li class="nav-item">
+      <%= link_to '<i class="fas fa-user-circle fa-lg mr-2"></i>'.html_safe+' Editar perfil', edit_user_registration_path, class: "nav-link text-reset"%>
+    </li>
     
     <li class="nav-item">
       <%= link_to '<i class="fas fa-power-off fa-lg mr-2"></i>'.html_safe+' Cerrar Sesion', destroy_user_session_path, method: :delete, class:"nav-link text-reset"%>
     </li>
+
+    <%# <%= link_to image_tag(current_user.photo_url, class: 'avatar'), tweets_path %> %>
+    
     <% else %>
     <li class="nav-item">
       <%= link_to '<i class="fas fa-sign-in-alt fa-lg mr-2"></i>'.html_safe+' Log in', new_user_session_path, class:"nav-link text-reset"%>
@@ -18,4 +26,5 @@
       <%= link_to 'Registro', new_user_registration_path, class:"nav-link text-reset"%>
     </li>
   <% end %>
+  
 </ul>
