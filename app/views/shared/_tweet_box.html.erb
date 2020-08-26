@@ -6,18 +6,18 @@
             <%= link_to 'retwitteó', tweet.tweet_ref, class: "text-reset" %>
         </div>
     <% end %>
-    <div class="col-sm-1 avatar-box">
-        <% if tweet.is_retweet? %>
-            <%= image_tag (tweet.tweet_ref.user.photo_url), class: "img-thumbnail rounded-circle avatar " %>
-        <% else %>
-             <%= image_tag (tweet.user.photo_url), class: "img-thumbnail rounded-circle avatar " %>
-        <% end %>
+    <div class="col-sm-1 p-0">
+        <div class="avatar-box rounded-circle">
+            <% if tweet.is_retweet? %>
+                <%= image_tag (tweet.tweet_ref.user.photo_url), class: "avatar" %>
+            <% else %>
+                <%= image_tag (tweet.user.photo_url), class: "avatar" %>
+            <% end %>
+       </div>
 
-        <% if user_signed_in? && current_user != tweet.user %>
-            <%= link_to (current_user.is_following?(tweet.user) ? '<i class="fas fa-users-slash"></i>' : '<i class="fas fa-user-plus"></i>').html_safe, users_follow_path(tweet.user.id), method: :post, 'title' => (current_user.is_following?(tweet.user) ? "siguiendo" : "Seguir" ) %>
-        <% end %>
        
     </div>
+       
 
     <div class="col-sm-11">
         <% if tweet.is_retweet? %>
@@ -37,8 +37,15 @@
                 </div>
             </div>
         <% else %>
-            @<%= tweet.user.username %>
-            <%= link_to distance_of_time_in_words(Time.now, tweet.created_at), tweet %>
+            <div class="row col-12">
+                @<%= tweet.user.username %>
+                <%= link_to distance_of_time_in_words(Time.now, tweet.created_at), tweet, class: "mx-2"  %>
+
+                <% if user_signed_in? && current_user != tweet.user %>
+                    <%= link_to (current_user.is_following?(tweet.user) ? 'Siguiendo' : 'Seguir').html_safe, users_follow_path(tweet.user.id), method: :post, class: "btn btn-primary btn-sm rounded-pill float-right px-4", 'title' => (current_user.is_following?(tweet.user) ? "Dejar de seguir" : "Seguir") %>
+                <% end %>
+            </div>
+
             <br>
             <%= tweet.content %>
             <div class="row mt-2">

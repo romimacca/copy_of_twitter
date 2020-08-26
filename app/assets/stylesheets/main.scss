@@ -1,9 +1,13 @@
-.avatar-box{
-     padding: 0;
-     overflow: hidden;
+
+.avatar-box {
+    overflow: hidden;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    padding: 0;
 }
 .avatar{
-    width: 50px;
+    width: auto;
     height: 50px;
 }
 textarea#tweet_content{

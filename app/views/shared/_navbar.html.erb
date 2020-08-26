@@ -1,25 +1,35 @@
 <ul class="nav flex-column">
 
   
-  <li class="nav-item">
+  <li class="nav-item py-2">
     <%= link_to '<i class="fas fa-home fa-lg mr-2"></i>'.html_safe+' Inicio', root_path, class:"nav-link text-reset"%>
   </li>
+  <li class="nav-item py-2">
+    <%= link_to '<i class="fas fa-hashtag fa-lg mr-2"></i>'.html_safe+' Explorar', explore_path, class:"nav-link text-reset"%>
+  </li>
+  
   <% if user_signed_in? %>
-    <li class="nav-item">
+    <li class="nav-item py-2">
       <%= link_to '<i class="fas fa-user-circle fa-lg mr-2"></i>'.html_safe+' Mi perfil', edit_user_registration_path, class: "nav-link text-reset"%>
     </li>
-     <li class="nav-item">
+     <li class="nav-item py-2">
       <%= link_to '<i class="fas fa-user-circle fa-lg mr-2"></i>'.html_safe+' Editar perfil', edit_user_registration_path, class: "nav-link text-reset"%>
     </li>
     
-    <li class="nav-item">
-      <%= link_to '<i class="fas fa-power-off fa-lg mr-2"></i>'.html_safe+' Cerrar Sesion', destroy_user_session_path, method: :delete, class:"nav-link text-reset"%>
+    <li class="nav-item py-2">
+      <%= link_to '<i class="fas fa-power-off fa-lg mr-2"></i>'.html_safe+' Cerrar Sesion', destroy_user_session_path, method: :get, class:"nav-link text-reset"%>
     </li>
 
-    <%# <%= link_to image_tag(current_user.photo_url, class: 'avatar'), tweets_path %> %>
+     <li class="nav-item py-2">
+      
+      <%= link_to image_tag(current_user.photo_url, class: 'avatar'), tweets_path, class: "avatar-box rounded-circle" %>
+      <%= current_user.username %>
+      
+    </li>
+
     
     <% else %>
-    <li class="nav-item">
+    <li class="nav-item py-2">
       <%= link_to '<i class="fas fa-sign-in-alt fa-lg mr-2"></i>'.html_safe+' Log in', new_user_session_path, class:"nav-link text-reset"%>
     </li>
     <li class="nav-item">
